@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+</head>
+<body>
+    <nav>
+        <ul class="navb">
+            <li><a href="#">Aimers</a></li>
+            <li><a href="#">Login</a></li>
+        </ul>
+    </nav>
+    <main>
+        <form id="signup" action="/signup" method="POST">
+            <label for="name">Name:</label>
+            <input id="name" name="name" type="Text"></input>
+            <label for="email">Email:</label>
+            <input id="email" name="email" type="email"></input>
+            <label for="password">Password:</label>
+            <input id="password"  name='password' type="password"></input>
+            <!-- confirm password -->
+            <label for="confirmpassword">Confirm Password:</label>
+            <input id="confirmpassword"  name='confirmpassword' type="password"></input>
+            <!-- phone no -->
+            <label for="phoneno">Phone:</label>
+            <input id="phoneno"  name='phoneno' type="number"></input>
+            <!-- nominiee -->
+            <label for="nominee">Nominee:</label>
+            <input id="nominee"  name='nominee' type="text"></input>
+            <button action="submit">Submit</button>
+        </form>
+    </main>
+</body>
+</html>
