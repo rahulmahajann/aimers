@@ -5,8 +5,10 @@ const hbs = require('hbs');
 const bcrypt = require('bcryptjs');
 
 const db = require('./db/connection');
+
 const Register = require('./models/register');
 const Transaction = require('./models/transaction');
+const Otp = require('./models/otp');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -93,7 +95,6 @@ app.post('/confirmdetails', async (req, res) => {
     const recieverAccountNo = req.body.toaccountno;
     const amountTransfered = req.body.transferedamount;
 
-    
     // console.log(senderAccountNo, recieverAccountNo, amountTransfered);
     
     const transactionSummary = new Transaction({
@@ -113,8 +114,25 @@ app.post('/confirmdetails', async (req, res) => {
     });
 });
 
-app.post('/otpvalidation', (req, res) => {
-    res.send('otp generated');
+app.post('/otpvalidation', async (req, res) => {
+    console.log(req.body.senderacc);
+
+    const senderAccNo = req.body.senderacc;
+
+    const userDetails = await Register.findOne({acc_no: senderAccNo});
+
+    console.log(userDetails.phoneno);
+
+    const senderOtp = Math.floor((Math.random()*10000000)+1);
+
+    const otpDetails = new Otp({
+        acc_no: senderAccNo,
+        otp: senderOtp
+    });
+
+    const otpSummary = await otpDetails.save();
+
+    res.send('hello otp sent')
 });
 
 app.listen(port, () => {

@@ -9,7 +9,7 @@
             <form action="/otpvalidation" method="POST">
                 <h1>hey this is confirm detail page</h1>
                 <p>sender</p>
-                {{senderAccountNo}}
+                <input type="text" name="senderacc" value={{senderAccountNo}}>
                 <p>reciever</p>
                 {{recieverAccountNo}}
                 <p>amount granted</p>
@@ -17,6 +17,8 @@
 
                 <button type="submit">Generate OTP</button>
             </form>
+
+            {{!-- <form action=""></form> --}}
         </main>
 
 </body>

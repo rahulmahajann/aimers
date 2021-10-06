@@ -6,6 +6,9 @@ const transSchema = new mongoose.Schema(
         toaccount: {type: Number, required: true},
         amount: {type:Number,required:true},
     },
+    {
+        timestamp: true,
+    }
 );
 
 const Transaction = mongoose.model('Transaction',transSchema);
