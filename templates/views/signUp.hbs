@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
 </head>
 <body>
@@ -11,22 +8,22 @@
     <main>
         <form id="signup" action="/signup" method="POST">
             <label for="accNo">Account Number:</label>
-            <input id="accNo" name="accountNumber" type="Text"></input>
+            <input id="accNo" name="accountNumber" type="Text" required></input>
             <label for="name">Name:</label>
-            <input id="name" name="name" type="Text"></input>
+            <input id="name" name="name" type="Text" required></input>
             <label for="email">Email:</label>
-            <input id="email" name="email" type="email"></input>
+            <input id="email" name="email" type="email" required></input>
             <label for="password">Password:</label>
-            <input id="password"  name='password' type="password"></input>
+            <input id="password"  name='password' type="password" required></input>
             <!-- confirm password -->
             <label for="confirmpassword">Confirm Password:</label>
-            <input id="confirmpassword"  name='confirmpassword' type="password"></input>
+            <input id="confirmpassword"  name='confirmpassword' type="password" required></input>
             <!-- phone no -->
             <label for="phoneno">Phone:</label>
-            <input id="phoneno"  name='phoneno' type="number"></input>
+            <input id="phoneno"  name='phoneno' type="number"required></input>
             <!-- nominiee -->
             <label for="nominee">Nominee:</label>
-            <input id="nominee"  name='nominee' type="text"></input>
+            <input id="nominee"  name='nominee' type="text" required></input>
             <button action="submit">Submit</button>
         </form>
     </main>

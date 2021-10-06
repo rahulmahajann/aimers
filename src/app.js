@@ -120,15 +120,15 @@ app.post('/confirmdetails', async (req, res) => {
 });
 
 app.post('/otpvalidation', async (req, res) => {
-    // console.log(req.body.senderacc);
-
     const senderAccNo = req.body.senderacc;
-
     const userDetails = await Register.findOne({acc_no: senderAccNo});
+    const userPhoneNo = userDetails.phoneno;    
 
-    // console.log(userDetails.phoneno);
+    // console.log(senderAccNo);
 
-    const senderOtp = Math.floor((Math.random()*10000000)+1);
+    await Otp.deleteMany({acc_no:senderAccNo});
+
+    const senderOtp= (""+Math.random()).substring(2, 8);
 
     const otpDetails = new Otp({
         acc_no: senderAccNo,
@@ -140,10 +140,10 @@ app.post('/otpvalidation', async (req, res) => {
     var params = {
         authorization: process.env.SMS,
         message: `your otp is -> ${senderOtp}`,
-        numbers: ['9625281237', '9868636253'] 
+        numbers: [`${userPhoneNo}`] 
     }
 
-                // fast2sms.sendMessage(params);
+                    // fast2sms.sendMessage(params);
 
     // res.send('hello otp sent');
 
@@ -168,8 +168,12 @@ app.post('/auth', async (req, res) => {
     console.log(otp, userOtp);
 
     if(otp==userOtp){
+        await Otp.deleteMany({acc_no:accNo});
+
         res.send('welcome to face detection');
     }else{
+
+        await Otp.deleteMany({acc_no:accNo});
         res.redirect('/');
     }   
 
