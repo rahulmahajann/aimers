@@ -7,14 +7,11 @@
     <title>SignUp</title>
 </head>
 <body>
-    <nav>
-        <ul class="navb">
-            <li><a href="#">Aimers</a></li>
-            <li><a href="#">Login</a></li>
-        </ul>
-    </nav>
+    {{>navbar}}
     <main>
         <form id="signup" action="/signup" method="POST">
+            <label for="accNo">Account Number:</label>
+            <input id="accNo" name="accountNumber" type="Text"></input>
             <label for="name">Name:</label>
             <input id="name" name="name" type="Text"></input>
             <label for="email">Email:</label>
