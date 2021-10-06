@@ -45,8 +45,8 @@ app.post('/signup', async (req, res) => {
                 'acc_no': req.body.accountNumber,
                 'name': req.body.name,
                 'email': req.body.email,
-                // 'password': bcrypt.hashSync(req.body.password,8),
-                'password': password,
+                'password': bcrypt.hashSync(password,8),
+                // 'password': password,
                 'nominee': req.body.nominee,
                 'phoneno': req.body.phoneno,
             })
@@ -74,15 +74,10 @@ app.post('/login', async (req, res)=> {
 
         const userEmail = await Register.findOne({email: login_email});
 
-        // if(bcrypt.compareSync(req.body.password,useremail.password)){
-        //     res.status(201).send('logged in');
-        //     console.log("logged in");
-        // }else{
-        //     res.status(400).send('sorry u have entered wrong email or password');
-        // }
-
-        if(password === userEmail.password){
-            res.status(201).render('transactionDetails');
+        if(bcrypt.compareSync(req.body.password,userEmail.password)){
+            res.status(201).render('transactionDetails',{
+                accountNumber: userEmail.acc_no
+            });
         }else{
             res.status(400).send('sorry u have entered wrong email or password');
         }
