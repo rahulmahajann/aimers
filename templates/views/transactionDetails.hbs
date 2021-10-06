@@ -5,11 +5,16 @@
 </head>
 <body>
     {{>navbar}}
+    <form action="/confirmdetails" method="POST">
     <h2>from account</h2>
-    {{accountNumber}}
+    <input type="number" name="accountno" value={{accountNumber}} >
     <h2>to account</h2>
-    <input type="text">
+    <input type="text" name="toaccountno">
     <h2>amout to transfered</h2>
-    <input type="text" value="50000">
+    <input type="text" name="transferedamount" value="50000">
+    <h2>balance</h2>
+    {{balance}}
+    <button type="submit">Confirm Details</button>
+    </form>
 </body>
 </html>

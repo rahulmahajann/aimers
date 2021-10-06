@@ -8,7 +8,13 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     nominee: { type: String, default: 'false', required: true },
     phoneno:{type:Number, required:true},
-    },  
+    accountbalance:{type:Number, required:true},
+    // transfer:{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:Trans,
+    //     required:true,
+    // },
+    },
 );
 const User = mongoose.model('User',userSchema);
 

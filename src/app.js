@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 
 const db = require('./db/connection');
 const Register = require('./models/register');
+const Transaction = require('./models/transaction');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -46,18 +47,17 @@ app.post('/signup', async (req, res) => {
                 'name': req.body.name,
                 'email': req.body.email,
                 'password': bcrypt.hashSync(password,8),
-                // 'password': password,
                 'nominee': req.body.nominee,
                 'phoneno': req.body.phoneno,
+                'accountbalance': 1000000
             })
 
             const registeredData = await data.save();
-            res.status(200).render('successSignUp');
-        }else{
-            res.send('u have entered wrong email or password');
+            res.status(200).redirect('/login');
         }
-
-        res.render('successLogin')
+        else{
+            res.render('passwordnotmatched');
+        }
 
     }catch(error){
         res.status(400).send(error);
@@ -65,18 +65,19 @@ app.post('/signup', async (req, res) => {
 
 });
 
-app.post('/login', async (req, res)=> {
+app.post('/transaction', async (req, res)=> {
     try{
         const login_email = req.body.email;
         const password = req.body.password;
 
-        console.log(login_email, password);
+        // console.log(login_email, password);
 
         const userEmail = await Register.findOne({email: login_email});
 
         if(bcrypt.compareSync(req.body.password,userEmail.password)){
             res.status(201).render('transactionDetails',{
-                accountNumber: userEmail.acc_no
+                accountNumber: userEmail.acc_no,
+                balance: userEmail.accountbalance
             });
         }else{
             res.status(400).send('sorry u have entered wrong email or password');
@@ -85,8 +86,35 @@ app.post('/login', async (req, res)=> {
     }catch(error){
         res.status(400).send('invalid details');
     }
+});
 
+app.post('/confirmdetails', async (req, res) => {
+    const senderAccountNo = req.body.accountno;
+    const recieverAccountNo = req.body.toaccountno;
+    const amountTransfered = req.body.transferedamount;
 
+    
+    // console.log(senderAccountNo, recieverAccountNo, amountTransfered);
+    
+    const transactionSummary = new Transaction({
+        'fromaccount': senderAccountNo,
+        'toaccount': recieverAccountNo,
+        'amount': amountTransfered
+    });
+    
+    const transactionSummaryData = await transactionSummary.save();
+
+    const userAccountNo = await Transaction.findOne({fromaccount: senderAccountNo});
+
+    res.render('confirmDetails',{
+        senderAccountNo: userAccountNo.fromaccount,
+        recieverAccountNo: userAccountNo.toaccount,
+        amountPaid: userAccountNo.amount,
+    });
+});
+
+app.post('/otpvalidation', (req, res) => {
+    res.send('otp generated');
 });
 
 app.listen(port, () => {
