@@ -82,7 +82,7 @@ app.post('/login', async (req, res)=> {
         // }
 
         if(password === userEmail.password){
-            res.status(201).render('successLogin');
+            res.status(201).render('transactionDetails');
         }else{
             res.status(400).send('sorry u have entered wrong email or password');
         }
