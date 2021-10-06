@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>  
+        <form action="/auth" method="POST">
+            <label for="phoneNo">Otp send at your registered number :</label>
+            <input id="phoneNo" name="phoneno" value={{phoneNo}} readonly>
+            <label for="otpVerify">Otp:</label>
+            <input type="text" name="otpVerify" id="otpVerify">
+            <button type="submit" >Face Recognition</button>
+        </form>
+</body>
+</html>

@@ -3,6 +3,8 @@ const path = require('path');
 const express = require('express');
 const hbs = require('hbs');
 const bcrypt = require('bcryptjs');
+const dotenv = require('dotenv');
+const fast2sms = require('fast-two-sms');
 
 const db = require('./db/connection');
 
@@ -12,6 +14,8 @@ const Otp = require('./models/otp');
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+dotenv.config();
 
 const staticPath = path.join(__dirname, '../public');
 const templatePath = path.join(__dirname, '../templates/views');
@@ -105,23 +109,24 @@ app.post('/confirmdetails', async (req, res) => {
     
     const transactionSummaryData = await transactionSummary.save();
 
-    const userAccountNo = await Transaction.findOne({fromaccount: senderAccountNo});
+    const userAccountNo = await Transaction.findOne({fromaccount: senderAccountNo, toaccount: recieverAccountNo});
+
 
     res.render('confirmDetails',{
         senderAccountNo: userAccountNo.fromaccount,
-        recieverAccountNo: userAccountNo.toaccount,
+        recieverAccNo: userAccountNo.toaccount,
         amountPaid: userAccountNo.amount,
     });
 });
 
 app.post('/otpvalidation', async (req, res) => {
-    console.log(req.body.senderacc);
+    // console.log(req.body.senderacc);
 
     const senderAccNo = req.body.senderacc;
 
     const userDetails = await Register.findOne({acc_no: senderAccNo});
 
-    console.log(userDetails.phoneno);
+    // console.log(userDetails.phoneno);
 
     const senderOtp = Math.floor((Math.random()*10000000)+1);
 
@@ -132,7 +137,42 @@ app.post('/otpvalidation', async (req, res) => {
 
     const otpSummary = await otpDetails.save();
 
-    res.send('hello otp sent')
+    var params = {
+        authorization: process.env.SMS,
+        message: `your otp is -> ${senderOtp}`,
+        numbers: ['9625281237', '9868636253'] 
+    }
+
+                // fast2sms.sendMessage(params);
+
+    // res.send('hello otp sent');
+
+    res.render('otp',{
+        phoneNo: userDetails.phoneno
+    })
+});
+
+app.post('/auth', async (req, res) => {
+    const phoneVerify = req.body.phoneno;
+    const userOtp = req.body.otpVerify;
+    // console.log(phoneVerify);
+
+    const accData = await Register.findOne({phoneno: phoneVerify});
+    const accNo = accData.acc_no;
+    // console.log(accNo);
+
+    const otpData = await Otp.findOne({acc_no: accNo});
+
+    const otp = otpData.otp;
+
+    console.log(otp, userOtp);
+
+    if(otp==userOtp){
+        res.send('welcome to face detection');
+    }else{
+        res.redirect('/');
+    }   
+
 });
 
 app.listen(port, () => {
