@@ -2,9 +2,32 @@
 <html lang="en">
 <head>
     <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: Roboto, Helvetica, sans-serif;
+        }
+    
+        .centered {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    
+        form {
+            border: solid;
+            border-color: red;
+        }
+    </style>
 </head>
 <body>  
-        <form action="/auth" method="POST">
+        <form class="centered" action="/auth" method="POST">
             <label for="phoneNo">Otp send at your registered number :</label>
             <input id="phoneNo" name="phoneno" value={{phoneNo}} readonly>
             <label for="otpVerify">Otp:</label>

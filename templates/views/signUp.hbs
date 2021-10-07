@@ -2,11 +2,34 @@
 <html lang="en">
 <head>
     <title>SignUp</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: Roboto, Helvetica, sans-serif;
+        }
+    
+        .centered {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    
+        form {
+            border: solid;
+            border-color: red;
+        }
+    </style>
 </head>
 <body>
     {{>navbar}}
     <main>
-        <form id="signup" action="/signup" method="POST">
+        <form class="centered" id="signup" action="/signup" method="POST">
             <label for="accNo">Account Number:</label>
             <input id="accNo" name="accountNumber" type="Text" required></input>
             <label for="name">Name:</label>

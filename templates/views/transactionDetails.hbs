@@ -2,10 +2,33 @@
 <html lang="en">
 <head>
     <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: Roboto, Helvetica, sans-serif;
+        }
+    
+        .centered {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    
+        form {
+            border: solid;
+            border-color: red;
+        }
+    </style>
 </head>
 <body>
     {{>navbar}}
-    <form action="/confirmdetails" method="POST">
+    <form class="centered" action="/confirmdetails" method="POST">
     <h2>from account</h2>
     <input type="number" name="accountno" value={{accountNumber}} readonly>
     <h2>to account</h2>

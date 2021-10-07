@@ -88,7 +88,7 @@ app.post('/transaction', async (req, res)=> {
         }else{
             res.status(400).send('sorry u have entered wrong email or password');
         }
-
+        
     }catch(error){
         res.status(400).send('invalid details');
     }

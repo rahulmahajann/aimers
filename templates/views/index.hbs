@@ -3,13 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            box-sizing:border-box;
+        }
+        
+        body{
+            font-family: Roboto, Helvetica, sans-serif;
+        }
+
+        .centered{
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        form{
+            padding: 50px;
+            border: solid;
+            border-radius: 12px;
+            border-color: red;
+        }
+
+        label, button{
+            display: block;
+        }
+
+        button{
+            text-align: center;
+
+        }
+        #contact-form {
+  padding-top: 35px;
+}
+#contact-form .form-group {
+  margin-bottom: 20px;
+}
+
+#contact-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#contact-form input,
+#contact-form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+#contact-form textarea {
+  height: 180px;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+  outline: none;
+  border-color: #e58455;
+}
+
+.submit {
+  text-align: center;
+}
+    </style>
 </head>
 <body>
     {{>navbar}}
     <main>
-        <form id="login" action="/transaction" method="POST">
+        <form class="centered" id="login" action="/transaction" method="POST">
             <label for="email">Email:</label>
             <input id="email" name="email" type="email" required></input>
             <label for="password">Password:</label>
