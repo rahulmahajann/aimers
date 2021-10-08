@@ -13,8 +13,12 @@
         
         body{
             font-family: Roboto, Helvetica, sans-serif;
+            background-color: #E5F0FD;
         }
 
+        main{
+            background-color: black;
+        }
         .centered{
             position: fixed;
             top: 50%;
@@ -25,8 +29,11 @@
         form{
             padding: 50px;
             border: solid;
-            border-radius: 12px;
-            border-color: red;
+            border-radius: 20px;
+            border-width: 5px;
+            border-color: #1A73E8;
+            color: #093977;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
         label, button{
@@ -35,46 +42,42 @@
 
         button{
             text-align: center;
-
+            background-color: #1A73E8; /* Green */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            font-size: 16px;
         }
-        #contact-form {
-  padding-top: 35px;
-}
-#contact-form .form-group {
-  margin-bottom: 20px;
-}
 
-#contact-form label {
+.contact-form label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
-#contact-form input,
-#contact-form textarea {
+.contact-form input{
   width: 100%;
   padding: 8px;
+  margin-bottom: 15px;
   border: 1px solid #ddd;
 }
 
-#contact-form textarea {
-  height: 180px;
-}
-
-#contact-form input:focus,
-#contact-form textarea:focus {
+.contact-form input:focus{
   outline: none;
-  border-color: #e58455;
+  border-color: #84B3F5;
 }
 
-.submit {
-  text-align: center;
+button{
+  margin: auto;
+  margin-top: 10px;
 }
-    </style>
+</style>
 </head>
 <body>
     {{>navbar}}
     <main>
-        <form class="centered" id="login" action="/transaction" method="POST">
+        <form class="centered contact-form" id="login" action="/transaction" method="POST">
             <label for="email">Email:</label>
             <input id="email" name="email" type="email" required></input>
             <label for="password">Password:</label>

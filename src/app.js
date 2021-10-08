@@ -46,6 +46,9 @@ app.post('/signup', async (req, res) => {
     
         const password = req.body.password;
         const confirmPassword = req.body.confirmpassword;
+        const img = req.body.imgupload;
+
+        console.log(img);
 
         if(password === confirmPassword){
             const data = new Register({
@@ -88,7 +91,7 @@ app.post('/transaction', async (req, res)=> {
         }else{
             res.status(400).send('sorry u have entered wrong email or password');
         }
-        
+
     }catch(error){
         res.status(400).send('invalid details');
     }
